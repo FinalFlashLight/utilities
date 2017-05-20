@@ -16,16 +16,25 @@ var _ = { };
   // Return an array of the first n elements of an array. If n is undefined,
   // return just the first element.
   _.first = function(array, n) {
+    if(n == null)
+    {
+      return array[0];
+    }
+
+    return array.splice(0,n);
+
   };
 
   // Like first, but for the last elements. If n is undefined, return just the
   // last element.
   _.last = function(array, n) {
+
   };
 
   // Call iterator(value, key, collection) for each element of collection.
   // Accepts both arrays and objects.
   _.each = function(collection, iterator) {
+
   };
 
   // Returns the index at which value can be found in the array, or -1 if value
@@ -140,17 +149,61 @@ var _ = { };
   _.sortBy = function(collection, iterator) {
   };
 
+
+
+
   // Zip together two or more arrays with elements of the same index
   // going together.
   //
   // Example:
   // _.zip(['a','b','c','d'], [1,2,3]) returns [['a',1], ['b',2], ['c',3], ['d',undefined]]
-  _.zip = function() {
+
+
+  _.zip = function(){
+    var zipped = [];
+    var longest = [];
+
+
+    var args = []; //used to keep actual arrays inside
+    var count = 0; //used to keep track of how many arrays there are
+
+    //this checks each argument, and if its an array, adds it to the args
+    for(var i = 0; i < arguments.length; ++i)
+    {
+      if(Array.isArray(arguments[i])){
+        args[count] = arguments[i];
+        ++count;
+      }
+    }
+
+    //go thru each argument, and find the longest one.
+    //this is so we can go thru them all.
+    for(var i = 0; i < args.length; ++i)
+    {
+      if(args[i].length > longest.length)
+      {
+        longest = args[i];
+
+      }
+    }
+
+    //the zippening
+    for(var i = 0; i < longest.length; ++i)
+    {
+      zipped.push([]);
+      for(var j = 0; j < args.length; ++j)
+      {
+        zipped[i].push(args[j][i]);
+      }
+    }
+    console.log(zipped);
+    return zipped;
   };
 
   // Takes a multidimensional array and converts it to a one-dimensional array.
   // The new array should contain all elements of the multidimensional array.
   _.flatten = function(nestedArray, result) {
+
   };
 
   // Takes an arbitrary number of arrays and produces an array that contains
