@@ -34,16 +34,29 @@ var _ = { };
   // Call iterator(value, key, collection) for each element of collection.
   // Accepts both arrays and objects.
   _.each = function(collection, iterator) {
+    for(var key in collection)
+    {
+      iterator(value, key, collection);
+    }
 
   };
 
   // Returns the index at which value can be found in the array, or -1 if value
   // is not present in the array.
   _.indexOf = function(array, target){
+
+    for(var i = 0; i < array.length; ++i)
+    {
+      if (array[i] === target) {
+        return i;
+      }
+    }
+    return -1;
   };
 
   // Return all elements of an array that pass a truth test ('iterator' function argument)
   _.filter = function(collection, iterator) {
+
   };
 
   // Return all elements of an array that don't pass a truth test (the 'iterator' function argument)
@@ -52,6 +65,7 @@ var _ = { };
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array) {
+
   };
 
 
@@ -158,7 +172,6 @@ var _ = { };
   // Example:
   // _.zip(['a','b','c','d'], [1,2,3]) returns [['a',1], ['b',2], ['c',3], ['d',undefined]]
 
-
   _.zip = function(){
     var zipped = [];
     var longest = [];
@@ -196,24 +209,40 @@ var _ = { };
         zipped[i].push(args[j][i]);
       }
     }
-    console.log(zipped);
     return zipped;
   };
 
   // Takes a multidimensional array and converts it to a one-dimensional array.
   // The new array should contain all elements of the multidimensional array.
   _.flatten = function(nestedArray, result) {
+        var arr = [];
+        var arr2 = [];
+        console.log(nestedArray);
+        for(var i = 0; i < nestedArray.length; ++i){
 
+          //console.log(nestedArray);
+          console.log(nestedArray[i]);
+          if(!Array.isArray(nestedArray[i])){
+            arr2.push(nestedArray[i]);
+
+        }
+        else {
+          arr2.concat(_.flatten(nestedArray[i]));
+        }
+      }
+        return arr2;
   };
 
   // Takes an arbitrary number of arrays and produces an array that contains
   // every item shared between all the passed-in arrays.
   _.intersection = function() {
+
   };
 
   // Take the difference between one array and a number of other arrays.
   // Only the elements present in just the first array will remain.
   _.difference = function(array) {
+
   };
 
 }).call(this);
